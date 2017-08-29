@@ -8,17 +8,24 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {AppRoutingModule} from "./app.routing";
 import {BsDropdownModule} from "ngx-bootstrap";
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 import { SafePipe } from './utility/safe.pipe';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VideoListComponent,
     VideoDetailComponent,
-    SafePipe
+    SafePipe,
+    HomeComponent
   ],
   imports: [
+    //ngx-bootstrap
     BsDropdownModule.forRoot(),
+    CarouselModule.forRoot(),
+
     BrowserModule,
     FormsModule,
     HttpModule,
