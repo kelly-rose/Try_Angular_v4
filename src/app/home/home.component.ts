@@ -1,29 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  homeImageList= [
-    {image:"assets/images/nature/4.jpg", title:"Image 4",link:'/videos/video-1'},
-    {image:"assets/images/nature/5.jpg", title:"Image 5",link:'/videos/video-1'},
-    {image:"assets/images/nature/6.jpg", title:"Image 6",link:'/videos/video-1'},
-    {image:"assets/images/nature/1.jpg", title:"Image 1",link:'/videos/video-1'}
-  ]
+export class HomeComponent implements OnInit , OnDestroy{
+ private req: any;
+  videoList: any[];
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private http: Http) { }
 
   ngOnInit() {
+   this.req= this.http.get('/assets/json/videos.json').subscribe(data => {
+      this.videoList = data.json();
+    })
+  }
+
+  ngOnDestroy() {
+    this.req.unsubscribe();
   }
 
   preventNormal(event:MouseEvent, image:any){
     if(!image.prevented){
       event.preventDefault();
-     this.router.navigate(['./videos'])
+      this.router.navigate(['/videos'])
     }
   }
-
 }

@@ -11,7 +11,6 @@ export class VideoListComponent implements OnInit, OnDestroy {
   todayDate;
   videoList: any[];
   req: any;
-  videoList:[any];
 
   constructor(private http: Http) {
   }
@@ -19,7 +18,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.todayDate = new Date();
     this.http.get('/assets/json/videos.json').subscribe(data => {
-      this.videoList = data.json() as [any];
+      this.videoList = data.json();
     })
   }
 

@@ -12,6 +12,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 import { SafePipe } from './utility/safe.pipe';
 import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     VideoListComponent,
     VideoDetailComponent,
     SafePipe,
-    HomeComponent
+    HomeComponent,
+    SearchComponent
   ],
   imports: [
     //ngx-bootstrap
