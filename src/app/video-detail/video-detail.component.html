@@ -1,1 +1,7 @@
-<h3>slug:{{slug}}</h3>
+<div *ngIf="!video">Loading</div>
+
+  <h1>{{video?.name}}</h1>
+  <p>
+    {{video?.slug}}
+  </p>
+

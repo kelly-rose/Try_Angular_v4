@@ -1,41 +1,34 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'video-list',
   templateUrl: './video-list.component.html',
   styleUrls: ['./video-list.component.css']
 })
-export class VideoListComponent implements OnInit {
+export class VideoListComponent implements OnInit, OnDestroy {
   title = "Video List";
   todayDate;
-  videoList = [
-    {
-      slug: 1,
-      name: "item1",
-      embed: "9wc8Gv8X49U"
-    },
-    {
-      slug: 2,
-      name: "item2",
-      embed: "9wc8Gv8X49U"
-    },
+  videoList: any[];
+  req: any;
+  videoList:[any];
 
-    {
-      slug: 3,
-      name: "item3",
-      embed: null
-    },
-  ];
-
-  constructor() {
+  constructor(private http: Http) {
   }
 
   ngOnInit() {
-    this.todayDate=new Date();
+    this.todayDate = new Date();
+    this.http.get('/assets/json/videos.json').subscribe(data => {
+      this.videoList = data.json() as [any];
+    })
   }
 
-  getEmbedUrl(item){
-    return "https://www.youtube.com/embed/"+item.embed+"?list=PLEsfXFp6DpzQThMU768hTZInWUqfoyTEW";
+  ngOnDestroy() {
+    this.req.unsubscribe();
+  }
+
+  getEmbedUrl(item) {
+    return "https://www.youtube.com/embed/" + item.embed + "?list=PLEsfXFp6DpzQThMU768hTZInWUqfoyTEW";
   }
 
 }
