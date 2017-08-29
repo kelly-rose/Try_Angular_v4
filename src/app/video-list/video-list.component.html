@@ -1,5 +1,5 @@
 <h1>
-  {{ title }}
+  {{ title }} {{todayDate | date:"short"}}
 </h1>
 
 <div *ngFor='let item of videoList'>
@@ -8,7 +8,7 @@
   <div [innerHTML]="item.embed"></div>
 <div [innerHTML]='"<h1>Hi, there</h1>"'></div>
   <div *ngIf="item.embed">
-  <iframe width="560" height="315" [src]="getEmbedUrl(item)" frameborder="0" allowfullscreen></iframe>
+  <iframe width="560" height="315" [src]="getEmbedUrl(item) | safe" frameborder="0" allowfullscreen></iframe>
   </div>
 
 </div>
