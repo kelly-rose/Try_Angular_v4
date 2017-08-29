@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'video-list',
@@ -11,25 +12,29 @@ export class VideoListComponent implements OnInit {
     {
       slug: 1,
       name: "item1",
-      embed: `<iframe width="560" height="315" src="https://www.youtube.com/embed/9wc8Gv8X49U?list=PLEsfXFp6DpzQThMU768hTZInWUqfoyTEW" frameborder="0" allowfullscreen></iframe>`
+      embed: "9wc8Gv8X49U"
     },
     {
       slug: 2,
       name: "item2",
-      embed: `<iframe width="560" height="315" src="https://www.youtube.com/embed/9wc8Gv8X49U?list=PLEsfXFp6DpzQThMU768hTZInWUqfoyTEW" frameborder="0" allowfullscreen></iframe>`
+      embed: "9wc8Gv8X49U"
     },
 
     {
       slug: 3,
       name: "item3",
-      embed: `<iframe width="560" height="315" src="https://www.youtube.com/embed/9wc8Gv8X49U?list=PLEsfXFp6DpzQThMU768hTZInWUqfoyTEW" frameborder="0" allowfullscreen></iframe>`
+      embed: null
     },
   ];
 
-  constructor() {
+  constructor(private sanitizer:DomSanitizer) {
   }
 
   ngOnInit() {
+  }
+
+  getEmbedUrl(item){
+    return this.sanitizer.bypassSecurityTrustResourceUrl( "https://www.youtube.com/embed/"+item.embed+"?list=PLEsfXFp6DpzQThMU768hTZInWUqfoyTEW");
   }
 
 }
